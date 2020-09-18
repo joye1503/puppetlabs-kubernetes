@@ -541,6 +541,7 @@ class kubernetes (
   String $etcd_package_name                                      = 'etcd-server',
   String $etcd_source                                            = "https://github.com/etcd-io/etcd/releases/download/v${etcd_version}/${etcd_archive}",
   String $etcd_install_method                                    = 'wget',
+  Optional[String] $kubernetes_apt_architecture                  = undef,
   Optional[String] $kubernetes_apt_location                      = undef,
   Optional[String] $kubernetes_apt_release                       = undef,
   Optional[String] $kubernetes_apt_repos                         = undef,
