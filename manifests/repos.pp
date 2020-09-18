@@ -2,6 +2,7 @@
 
 class kubernetes::repos (
   String $container_runtime                 = $kubernetes::container_runtime,
+  Optional[String] $kubernetes_apt_architecture = $kubernetes::kubernetes_apt_architecture,
   Optional[String] $kubernetes_apt_location = $kubernetes::kubernetes_apt_location,
   Optional[String] $kubernetes_apt_release  = $kubernetes::kubernetes_apt_release,
   Optional[String] $kubernetes_apt_repos    = $kubernetes::kubernetes_apt_repos,
@@ -26,6 +27,7 @@ class kubernetes::repos (
       'Debian': {
         $codename = fact('os.distro.codename')
         apt::source { 'kubernetes':
+          architecture => pick($kubernetes_apt_architecture,'arm64'),
           location => pick($kubernetes_apt_location,'https://apt.kubernetes.io'),
           repos    => pick($kubernetes_apt_repos,'main'),
           release  => pick($kubernetes_apt_release,'kubernetes-xenial'),
